@@ -9,8 +9,7 @@ import shutil
 from pathlib import Path
 
 import tqdm
-
-ALOHA_RAW_URLS_DIR = "lerobot/common/datasets/push_dataset_to_hub/_aloha_raw_urls"
+from huggingface_hub import snapshot_download
 
 
 def download_raw(raw_dir, dataset_id):
@@ -89,36 +88,12 @@ def download_xarm(raw_dir: Path):
 
 
 def download_aloha(raw_dir: Path, dataset_id: str):
-    import gdown
-
-    subset_id = dataset_id.replace("aloha_", "")
-    urls_path = Path(ALOHA_RAW_URLS_DIR) / f"{subset_id}.txt"
-    assert urls_path.exists(), f"{subset_id}.txt not found in '{ALOHA_RAW_URLS_DIR}' directory."
-
-    with open(urls_path) as f:
-        # strip lines and ignore empty lines
-        urls = [url.strip() for url in f if url.strip()]
-
-    # sanity check
-    for url in urls:
-        assert (
-            "drive.google.com/drive/folders" in url or "drive.google.com/file" in url
-        ), f"Wrong url provided '{url}' in file '{urls_path}'."
-
     raw_dir = Path(raw_dir)
     raw_dir.mkdir(parents=True, exist_ok=True)
 
-    logging.info(f"Start downloading from google drive for {dataset_id}")
-    for url in urls:
-        if "drive.google.com/drive/folders" in url:
-            # when a folder url is given, download up to 50 files from the folder
-            gdown.download_folder(url, output=str(raw_dir), remaining_ok=True)
-
-        elif "drive.google.com/file" in url:
-            # because of the 50 files limit per folder, we download the remaining files (file by file)
-            gdown.download(url, output=str(raw_dir), fuzzy=True)
-
-    logging.info(f"End downloading from google drive for {dataset_id}")
+    logging.info(f"Start downloading from huggingface.co/cadene for {dataset_id}")
+    snapshot_download(f"cadene/{dataset_id}_raw", repo_type="dataset", local_dir=raw_dir)
+    logging.info(f"Finish downloading from huggingface.co/cadene for {dataset_id}")
 
 
 def download_umi(raw_dir: Path):

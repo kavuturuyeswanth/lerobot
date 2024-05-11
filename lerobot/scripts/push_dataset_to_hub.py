@@ -10,7 +10,6 @@ python lerobot/scripts/push_dataset_to_hub.py \
 --dataset-id pusht \
 --raw-format pusht_zarr \
 --community-id lerobot \
---revision v1.2 \
 --dry-run 1 \
 --save-to-disk 1 \
 --save-tests-to-disk 0 \
@@ -21,7 +20,6 @@ python lerobot/scripts/push_dataset_to_hub.py \
 --dataset-id xarm_lift_medium \
 --raw-format xarm_pkl \
 --community-id lerobot \
---revision v1.2 \
 --dry-run 1 \
 --save-to-disk 1 \
 --save-tests-to-disk 0 \
@@ -32,7 +30,6 @@ python lerobot/scripts/push_dataset_to_hub.py \
 --dataset-id aloha_sim_insertion_scripted \
 --raw-format aloha_hdf5 \
 --community-id lerobot \
---revision v1.2 \
 --dry-run 1 \
 --save-to-disk 1 \
 --save-tests-to-disk 0 \
@@ -43,7 +40,6 @@ python lerobot/scripts/push_dataset_to_hub.py \
 --dataset-id umi_cup_in_the_wild \
 --raw-format umi_zarr \
 --community-id lerobot \
---revision v1.2 \
 --dry-run 1 \
 --save-to-disk 1 \
 --save-tests-to-disk 0 \
