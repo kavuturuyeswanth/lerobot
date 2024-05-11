@@ -295,7 +295,7 @@ def main():
     parser.add_argument(
         "--num-workers",
         type=int,
-        default=16,
+        default=8,
         help="Number of processes of Dataloader for computing the dataset statistics.",
     )
     parser.add_argument(
