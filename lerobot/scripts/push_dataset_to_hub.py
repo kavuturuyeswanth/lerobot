@@ -218,6 +218,9 @@ def push_dataset_to_hub(
             fname = f"{key}_episode_{episode_index:06d}.mp4"
             shutil.copy(videos_dir / fname, tests_videos_dir / fname)
 
+    if not save_to_disk:
+        shutil.rmtree(out_dir)
+
 
 def main():
     parser = argparse.ArgumentParser()
